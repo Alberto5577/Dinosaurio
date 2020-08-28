@@ -40,9 +40,9 @@ function borraCanvas(){ //En el momento cambias altura/anchura del canvas se bor
 
 var suelo = 200;
 var trex = {y: suelo, vy: 0, gravedad: 2, salto: 28, vymax: 9, saltando: false};
-var nivel = {velocidad: 9, puntuacion: 0};
+var nivel = {velocidad: 9, puntuacion: 0, muerto: false};
 var cactus = {x: ancho + 100 , y: suelo};
-var nube = {x: 400, y: 100};
+var nube = {x: 400, y: 100, velocidad: 1};
 var suelog = {x: 0, y: suelo + 30};
 
 function drawRex(){
@@ -98,8 +98,8 @@ function saltar(){
 function gravedad(){
     if(trex.saltando == true){
 
-        if(trex.y - trex.vy - trex.gravedad> suelo){
-            trex.saltando == false;
+        if(trex.y - trex.vy - trex.gravedad > suelo){
+            trex.saltando = false;
             trex.vy = 0;
             trex.y = suelo;
         }
@@ -110,6 +110,21 @@ function gravedad(){
     }
 }
 
+function colision(){
+    //cactus.x
+    //trex.y
+
+    if(cactus.x >= 100 && cactus.x <= 150){
+        if(trex.y >= suelo-25){
+            nivel.muerto = true;
+            nivel.velocidad = 0;
+            nube.velocidad = 0;
+        }
+    }
+
+}
+
+
 
 //-------------------------------------------
 //BUCLE PRINCIPAL
@@ -119,9 +134,10 @@ setInterval(function(){
     principal();
 },1000/FPS);
 
-function principal (){
+function principal(){
     borraCanvas();
     gravedad();
+    colision();
     logicaSuelo();
     logicaCactus();
     logicaNube();
@@ -129,5 +145,4 @@ function principal (){
     drawNube();
     drawCactus();
     drawRex();
-    
 }

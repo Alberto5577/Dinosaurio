@@ -44,14 +44,44 @@ function borraCanvas(){ //En el momento cambias altura/anchura del canvas se bor
 
 var suelo = 200;
 var trex = {y: suelo, vy: 0, gravedad: 2, salto: 28, vymax: 9, saltando: false};
+var nivel = {velocidad: 9, puntuacion: 0};
+var cactus = {x: ancho + 100 , y: suelo};
+var nube = {x: 400, y: 100};
 
 function drawRex(){
     ctx.drawImage(imgRex,0,0,860,1039,100,trex.y,50,50);
 }
 
+function drawCactus(){
+    ctx.drawImage(imgCactus,0,0,498,980,cactus.x,cactus.y,498,980);
+}
+
+function drawNube(){
+    ctx.drawImage(imgCNube,0,0,728,318,nube.x,nube.y,728,318);
+}
+
+function logicaCactus(){
+    if(cactus.x < -100){
+        cactus.x = ancho + 100;
+    }
+    else{
+        cactus.x -= nivel.velocidad;
+    }
+}
+
+function logicaNube(){
+    if(nube.x < -100){
+        nube.x = ancho + 100;
+    }
+    else{
+        nube.x -= 2;
+    }
+}
+
+
 function saltar(){
     trex.saltando = true;
-trex.vy = trex.salto;
+    trex.vy = trex.salto;
 }
 
 
@@ -82,5 +112,10 @@ setInterval(function(){
 function principal (){
     borraCanvas();
     gravedad();
+    logicaCactus();
+    logicaNube();
+    drawNube();
+    drawCactus();
     drawRex();
+    
 }

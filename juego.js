@@ -20,12 +20,8 @@ function cargaImagenes(){
 }
 
 
-
-
-
 var ancho = 700;
 var alto = 300;
-
 var canvas, ctx;
 
 function inicializa(){
@@ -47,6 +43,7 @@ var trex = {y: suelo, vy: 0, gravedad: 2, salto: 28, vymax: 9, saltando: false};
 var nivel = {velocidad: 9, puntuacion: 0};
 var cactus = {x: ancho + 100 , y: suelo};
 var nube = {x: 400, y: 100};
+var suelog = {x: 0, y: suelo + 30};
 
 function drawRex(){
     ctx.drawImage(imgRex,0,0,860,1039,100,trex.y,50,50);
@@ -57,7 +54,20 @@ function drawCactus(){
 }
 
 function drawNube(){
-    ctx.drawImage(imgCNube,0,0,728,318,nube.x,nube.y,728,318);
+    ctx.drawImage(imgNube,0,0,728,318,nube.x,nube.y,728,318);
+}
+
+function drawSuelo(){
+    ctx.drawImage(imgSuelo,suelog.x,0,640,30,suelog.y,640,30);
+}
+
+function logicaSuelo(){
+    if(suelog.x > 640){
+        suelog.x = 0;
+    }
+    else{
+        suelog.x += nivel.velocidad;
+    }
 }
 
 function logicaCactus(){
@@ -112,8 +122,10 @@ setInterval(function(){
 function principal (){
     borraCanvas();
     gravedad();
+    logicaSuelo();
     logicaCactus();
     logicaNube();
+    drawSuelo();
     drawNube();
     drawCactus();
     drawRex();

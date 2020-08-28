@@ -1,7 +1,18 @@
 document.addEventListener('keydown', function(evento){
 if(evento.keyCode == 32){
     console.log("salta");
-    saltar();
+
+    if(nivel.muerto == false){
+        saltar();
+    }
+    else{
+        nivel.velocidad = 9;
+        nivel.muerto = false;
+        nube.velocidad = 1;
+        cactus.x = ancho + 100;
+        nube.x = ancho + 100;
+    }
+    
 }
 })
 

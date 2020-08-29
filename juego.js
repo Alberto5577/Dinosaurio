@@ -65,7 +65,7 @@ function drawCactus(){
 }
 
 function drawNube(){
-    ctx.drawImage(imgNube,0,0,728,318,nube.x,nube.y - 70,150,50);
+    ctx.drawImage(imgNube,10,0,728,318,nube.x,nube.y - 70,150,50);
 }
 
 function drawSuelo(){
@@ -96,7 +96,7 @@ function logicaNube(){
         nube.x = ancho + 100;
     }
     else{
-        nube.x -= 2;
+        nube.x -= nube.velocidad;
     }
 }
 

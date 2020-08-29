@@ -3,7 +3,9 @@ if(evento.keyCode == 32){
     console.log("salta");
 
     if(nivel.muerto == false){
-        saltar();
+        if(trex.saltando == false){
+            saltar(); 
+        }
     }
     else{
         nivel.velocidad = 9;
@@ -66,7 +68,7 @@ function drawNube(){
 }
 
 function drawSuelo(){
-    ctx.drawImage(imgSuelo,suelog.x,0,640,30,suelog.x, suelog.y,640,30);
+    ctx.drawImage(imgSuelo,suelog.x,0,604,19,suelog.x, suelog.y,604,19);
 }
 
 function logicaSuelo(){

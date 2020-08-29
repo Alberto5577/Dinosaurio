@@ -66,7 +66,7 @@ function drawNube(){
 }
 
 function drawSuelo(){
-    ctx.drawImage(imgSuelo,suelog.x,0,640,30,suelog.y,640,30);
+    ctx.drawImage(imgSuelo,suelog.x,0,640,30,suelog.x, suelog.y,640,30);
 }
 
 function logicaSuelo(){

@@ -41,9 +41,6 @@ function inicializa(){
     cargaImagenes();
 }
 
-
-
-
 function borraCanvas(){ //En el momento cambias altura/anchura del canvas se borra todo
     canvas.width = ancho;
     canvas.height = alto;

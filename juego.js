@@ -144,7 +144,7 @@ function marcador(){
 
     if(nivel.muerto == true){
         ctx.font = "60px impact";
-        ctx.fillText(`GAME OVER`,240,150);
+        ctx.fillText(`	\u2620\uFE0F GAME OVER \u2620\uFE0F`,140,150);
     }
 }
 

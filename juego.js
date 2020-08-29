@@ -13,7 +13,7 @@ if(evento.keyCode == 32){
         nube.velocidad = 1;
         nivel.marcador = 0;
         cactus.x = ancho + 100;
-        nube.x = ancho + 100;
+        nube.x = 450;
     }
     
 }

@@ -11,6 +11,7 @@ if(evento.keyCode == 32){
         nivel.velocidad = 9;
         nivel.muerto = false;
         nube.velocidad = 1;
+        nivel.marcador = 0;
         cactus.x = ancho + 100;
         nube.x = ancho + 100;
     }
@@ -29,7 +30,7 @@ function cargaImagenes(){
     imgRex.src = 'img/rex.png';
     imgCactus.src = 'img/cactus.png';
     imgNube.src = 'img/cloud.png';
-    imgSuelo.src = 'img/suelo.png';
+    imgSuelo.src = 'img/suelo2.png';
 }
 
 
@@ -50,7 +51,7 @@ function borraCanvas(){
 
 var suelo = 200;
 var trex = {y: suelo, vy: 0, gravedad: 2, salto: 28, vymax: 9, saltando: false};
-var nivel = {velocidad: 9, puntuacion: 0, muerto: false};
+var nivel = {velocidad: 9, marcador: 0, muerto: false};
 var cactus = {x: ancho + 100 , y: suelo};
 var nube = {x: 400, y: 100, velocidad: 1};
 var suelog = {x: 0, y: suelo + 30};
@@ -60,19 +61,19 @@ function drawRex(){
 }
 
 function drawCactus(){
-    ctx.drawImage(imgCactus,0,0,498,980,cactus.x,cactus.y,498,980);
+    ctx.drawImage(imgCactus,0,0,498,980,cactus.x,cactus.y,70,70);
 }
 
 function drawNube(){
-    ctx.drawImage(imgNube,0,0,728,318,nube.x,nube.y,728,318);
+    ctx.drawImage(imgNube,0,0,728,318,nube.x,nube.y - 70,150,50);
 }
 
 function drawSuelo(){
-    ctx.drawImage(imgSuelo,suelog.x,0,604,19,suelog.x, suelog.y,604,19);
+    ctx.drawImage(imgSuelo,suelog.x,0,100,30,0, suelog.y,700,30);
 }
 
 function logicaSuelo(){
-    if(suelog.x > 640){
+    if(suelog.x > 100){
         suelog.x = 0;
     }
     else{
@@ -83,6 +84,7 @@ function logicaSuelo(){
 function logicaCactus(){
     if(cactus.x < -100){
         cactus.x = ancho + 100;
+        nivel.marcador++;
     }
     else{
         cactus.x -= nivel.velocidad;
@@ -124,7 +126,7 @@ function colision(){
     //cactus.x
     //trex.y
 
-    if(cactus.x >= 100 && cactus.x <= 150){
+    if(cactus.x >= 50 && cactus.x <= 150){
         if(trex.y >= suelo-25){
             nivel.muerto = true;
             nivel.velocidad = 0;
@@ -134,6 +136,17 @@ function colision(){
 
 }
 
+
+function marcador(){
+    ctx.font = "30px impact";
+    ctx.fillstyle = '#55555';
+    ctx.fillText(`${nivel.marcador}`,600,50);
+
+    if(nivel.muerto == true){
+        ctx.font = "60px impact";
+        ctx.fillText(`GAME OVER`,240,150);
+    }
+}
 
 
 //-------------------------------------------
@@ -155,4 +168,5 @@ function principal(){
     drawNube();
     drawCactus();
     drawRex();
+    marcador();
 }
